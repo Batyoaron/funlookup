@@ -12,4 +12,11 @@ you need for this:
 download:
 
                                            git clone https://github.com/Batyoaron/funlookup
-                                           cd funlookup
+                                                         cd funlookup
+                                           
+and just run:                                           
+    
+                                                          python3 ping.py
+
+or whatever you want                                            
+                                            
