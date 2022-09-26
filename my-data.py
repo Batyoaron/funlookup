@@ -26,3 +26,24 @@ s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(("8.8.8.8", 80))
 print('your ip:')
 print(s.getsockname()[0])
+print('')
+print('proxy:')
+import requests
+
+proxy_ip = "<IP>"
+proxy_port = "<PORT>"
+proxy_user = "<USERNAME>"
+proxy_pass = "<PASSWORD>"
+
+proxies = {
+    "http": f"http://{proxy_user}:{proxy_pass}@{proxy_ip}:{proxy_port}/",
+    "https": f"http://{proxy_user}:{proxy_pass}@{proxy_ip}:{proxy_port}/"
+}
+
+url = 'https://api.ipify.org'
+
+try:
+    response = requests.get(url, proxies=proxies)
+    assert response.text==proxy_ip
+except:
+    print("Proxy does not work")
