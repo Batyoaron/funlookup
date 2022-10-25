@@ -36,4 +36,4 @@ Funlookup contain:
 Root needed for DHCP lsitener(not working in ubuntu. Only sudo)
 
 Tested on: 
-   Termux(soon on kali linux)
+   Termux, Kali Linux
