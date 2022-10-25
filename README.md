@@ -1,3 +1,8 @@
+Funlookup is an information gathering tool.
+
+Please do not insult peoples with this program
+
+
 If you have issues with downloading pip. Try this:
 
     apt upgrade
