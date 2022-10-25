@@ -1,13 +1,11 @@
-simplified nmap
+
 
 
 
 things needed:
 
 
-    python3
-    pip3 install requests
-    pip3 install pyfiglet
+    pip3 install requirements.txt
 
 
 download link:
@@ -17,6 +15,6 @@ download link:
 running:
      
     cd funlookup
-    python3 ping.py
+    python3 funlookup.py
 
 or run whatever you want
