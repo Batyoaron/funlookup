@@ -13,7 +13,7 @@ If you have issues with downloading pip. Try this:
 things needed:
 
 
-    pip3 install requirements.txt
+    pip3 install -r requirements.txt
 
 
 download link:
