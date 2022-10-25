@@ -118,6 +118,7 @@ if chs == "3":
     print(result)
     exit()
     
+    
 
     
 
@@ -133,119 +134,46 @@ print('')
 if chs == "4":
     if not os.geteuid()==0:
         print("\033[1;31;40m \n")
-        sys.exit('Run it with root!)
+        sys.exit('Run it with root!')
+        
+                   
+              
 
-from __future__ import print_function
 from scapy.all import *
-
 import time
 
-__version__ = "0.0.3"
-
-# Fixup function to extract dhcp_options by key
-def get_option(dhcp_options, key):
-
-    must_decode = ['hostname', 'domain', 'vendor_class_id']
-    try:
-        for i in dhcp_options:
-            if i[0] == key:
-                # If DHCP Server Returned multiple name servers 
-                # return all as comma seperated string.
-                if key == 'name_server' and len(i) > 2:
-                    return ",".join(i[1:])
-                # domain and hostname are binary strings,
-                # decode to unicode string before returning
-                elif key in must_decode:
-                    return i[1].decode()
-                else: 
-                    return i[1]        
-    except:
-        pass
+def listen_dhcp():
+    # Make sure it is DHCP with the filter options
+    sniff(prn=print_packet, filter='udp and (port 67 or port 68)')
 
 
-def handle_dhcp_packet(packet):
+def print_packet(packet):
+    # initialize these variables to None at first
+    target_mac, requested_ip, hostname, vendor_id = [None] * 4
+    # get the MAC address of the requester
+    if packet.haslayer(Ether):
+        target_mac = packet.getlayer(Ether).src
+    # get the DHCP options
+    dhcp_options = packet[DHCP].options
+    for item in dhcp_options:
+        try:
+            label, value = item
+        except ValueError:
+            continue
+        if label == 'requested_addr':
+            # get the requested IP
+            requested_ip = value
+        elif label == 'hostname':
+            # get the hostname of the device
+            hostname = value.decode()
+        elif label == 'vendor_class_id':
+            # get the vendor ID
+            vendor_id = value.decode()
+    if target_mac and vendor_id and hostname and requested_ip:
+        # if all variables are not None, print the device details
+        time_now = time.strftime("[%Y-%m-%d - %H:%M:%S]")
+        print(f"{time_now} : {target_mac}  -  {hostname} / {vendor_id} requested {requested_ip}")
 
-    # Match DHCP discover
-    if DHCP in packet and packet[DHCP].options[0][1] == 1:
-        print('---')
-        print('New DHCP Discover')
-        #print(packet.summary())
-        #print(ls(packet))
-        hostname = get_option(packet[DHCP].options, 'hostname')
-        print(f"Host {hostname} ({packet[Ether].src}) asked for an IP")
-
-
-    # Match DHCP offer
-    elif DHCP in packet and packet[DHCP].options[0][1] == 2:
-        print('---')
-        print('New DHCP Offer')
-        #print(packet.summary())
-        #print(ls(packet))
-
-        subnet_mask = get_option(packet[DHCP].options, 'subnet_mask')
-        lease_time = get_option(packet[DHCP].options, 'lease_time')
-        router = get_option(packet[DHCP].options, 'router')
-        name_server = get_option(packet[DHCP].options, 'name_server')
-        domain = get_option(packet[DHCP].options, 'domain')
-
-        print(f"DHCP Server {packet[IP].src} ({packet[Ether].src}) "
-              f"offered {packet[BOOTP].yiaddr}")
-
-        print(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
-              f"{lease_time}, router: {router}, name_server: {name_server}, "
-              f"domain: {domain}")
-
-
-    # Match DHCP request
-    elif DHCP in packet and packet[DHCP].options[0][1] == 3:
-        print('---')
-        print('New DHCP Request')
-        #print(packet.summary())
-        #print(ls(packet))
-
-        requested_addr = get_option(packet[DHCP].options, 'requested_addr')
-        hostname = get_option(packet[DHCP].options, 'hostname')
-        print(f"Host {hostname} ({packet[Ether].src}) requested {requested_addr}")
-
-
-    # Match DHCP ack
-    elif DHCP in packet and packet[DHCP].options[0][1] == 5:
-        print('---')
-        print('New DHCP Ack')
-        #print(packet.summary())
-        #print(ls(packet))
-
-        subnet_mask = get_option(packet[DHCP].options, 'subnet_mask')
-        lease_time = get_option(packet[DHCP].options, 'lease_time')
-        router = get_option(packet[DHCP].options, 'router')
-        name_server = get_option(packet[DHCP].options, 'name_server')
-
-        print(f"DHCP Server {packet[IP].src} ({packet[Ether].src}) "
-              f"acked {packet[BOOTP].yiaddr}")
-
-        print(f"DHCP Options: subnet_mask: {subnet_mask}, lease_time: "
-              f"{lease_time}, router: {router}, name_server: {name_server}")
-
-    # Match DHCP inform
-    elif DHCP in packet and packet[DHCP].options[0][1] == 8:
-        print('---')
-        print('New DHCP Inform')
-        #print(packet.summary())
-        #print(ls(packet))
-
-        hostname = get_option(packet[DHCP].options, 'hostname')
-        vendor_class_id = get_option(packet[DHCP].options, 'vendor_class_id')
-
-        print(f"DHCP Inform from {packet[IP].src} ({packet[Ether].src}) "
-              f"hostname: {hostname}, vendor_class_id: {vendor_class_id}")
-
-    else:
-        print('---')
-        print('Some Other DHCP Packet')
-        print(packet.summary())
-        print(ls(packet))
-
-    return
 
 if __name__ == "__main__":
-    sniff(filter="udp and (port 67 or 68)", prn=handle_dhcp_packet)
+    listen_dhcp()
