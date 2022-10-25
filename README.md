@@ -1,4 +1,7 @@
+If you have issues with downloading pip. Try this:
 
+    apt upgrade
+    apt update
 
 
 
