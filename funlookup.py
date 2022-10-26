@@ -140,7 +140,7 @@ if chs == "6":
         os.execl(sys.executable, sys.executable, *sys.argv)
     
     
-if(chp >= '1'):
+if(chp >= '2'):
     print("\033[1;31;40m \n")
     print('Wrong choice')
     os.execl(sys.executable, sys.executable, *sys.argv)
