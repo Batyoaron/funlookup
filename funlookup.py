@@ -23,7 +23,7 @@ os.system('clear')
 
 print('')
 print("\033[1;35;40m \n")
-atexit.register(print,"[;] Thanks for used funlookup")
+atexit.register(print,"[*] Thanks for used funlookup")
    
     
 
@@ -79,33 +79,102 @@ print("\033[1;33;40m \n")
 print('')
 
 print('[1]: Wifi scanner          [5]: My data')
-print('[2]: Telnet checker        \033[1;34;40m[6]: Coming soon...\033[1;33;40m')
+print('[2]: Telnet checker        \033[1;33;40m[6]: Ip grabber\033[1;33;40m')
 print('[3]: Ip data             \033[1;34;40m  [7]: Coming soon...\033[1;33;40m')
 print('[4]: DHCP listener\033[1;31;40m(root)   \033[1;34;40m[8]: Coming soon...')
 print('')
+print('')
+print('\033[1;30;40m[ press\033[1;31;40m X\033[1;30;40m to exit ]')
 print("\033[1;36;40m \n")
 
 
 
 
 chs = input('your choice here: ')
+
+if chs == "x":exit()
+if chs == "X":exit()
+
 if(chs <= '0'):
     print("\033[1;31;40m \n")
     print('Wrong choice')
     os.execl(sys.executable, sys.executable, *sys.argv)
     
     
-if(chs >= '6'):
+if(chs >= '7'):
     print("\033[1;31;40m \n")
     print('Wrong choice')
     os.execl(sys.executable, sys.executable, *sys.argv)
 
+####menu of ip grabber
 
+if chs == "6":os.system('clear')
 
+if chs == "6":print("\033[1;33;40m \n")
+if chs == "6":ascii_banner = pyfiglet.figlet_format("funlookup")
+if chs == "6":print(ascii_banner)
+print('')
+if chs == "6":
+    print("\033[1;31;40m \n")
+    print('[!]: Please choose an opinion')
+    print('')
+    if chs == "6":print("\033[1;33;40m \n")
+    print('')
+    print('[1]: Ping a website')
+    print('\033[1;34;40mMore is coming soon...')
+    print('')
+    print('\033[1;30;40m[ press\033[1;31;40m X\033[1;30;40m to exit ]')
     
-       
+    
+    
+    if chs == "6":print("\033[1;36;40m \n")
+    chp = input('Your choice here: ')
+    
+   
+    if chp == "x":exit()
+    if chp == "X":exit()
+    
+    if(chp <= '0'):
+        print("\033[1;31;40m \n")
+        print('Wrong choice')
+        os.execl(sys.executable, sys.executable, *sys.argv)
+    
+    
+if(chp >= '1'):
+    print("\033[1;31;40m \n")
+    print('Wrong choice')
+    os.execl(sys.executable, sys.executable, *sys.argv)
+    
+    ###ping
+    
+    
+    if chp == "1":
+        tkt = input('Input a website name: ')
+        print('')
+        print('')
+        hostname = tkt
+        response = os.system("ping -c 1 " + hostname)
+        if response == 0:
+            
+            print (hostname, '\033[1;32;40m is up!')
+            print('')
+            op = input('\033[1;36;40mpress \033[1;32;40mENTER\033[1;36;40m to continue or \033[1;31;40mX\033[1;36;40m to exit: ')
+            if op == "":os.execl(sys.executable, sys.executable, *sys.argv)
+            if op == "x":exit()
+        else:
+                print (hostname, '\033[1;31;40m is down!')
+                print('')
+                op = input('\033[1;36;40mpress \033[1;32;40mENTER\033[1;36;40m to continue or \033[1;31;40mX\033[1;36;40m to exit: ')
+                if op == "":os.execl(sys.executable, sys.executable, *sys.argv)
+                if op == "x":exit()
+                
+    if chp == "1":os.system('clear')
 
-print("\033[1;32;40m \n")
+    if chp == "1":print("\033[1;33;40m \n")
+    if chp == "1":ascii_banner = pyfiglet.figlet_format("funlookup")
+    if chp == "1":print(ascii_banner)
+print('')
+
 
 ## wifi scanner
 
@@ -114,8 +183,9 @@ if chs == "1":os.system('clear')
 if chs == "1":print("\033[1;33;40m \n")
 if chs == "1":ascii_banner = pyfiglet.figlet_format("funlookup")
 if chs == "1":print(ascii_banner)
-print("\033[1;36;40m \n")
-print('[TIP]: if 192.168.1.1 is down you need to connect to the router')
+if chs == "1":
+    print("\033[1;36;40m \n")
+    print('[TIP]: if 192.168.1.1 is down you need to connect to the router')
 print('')
 print("\033[1;33;40m \n")
  
@@ -228,7 +298,10 @@ if chs == "5":
     
     op = input('\033[1;36;40mpress \033[1;32;40mENTER\033[1;36;40m to continue or \033[1;31;40mX\033[1;36;40m to exit: ')
     if op == "":os.execl(sys.executable, sys.executable, *sys.argv)
-    if op == "x":exit()
+    if op == "x":
+        exit()
+    else:
+        exit()
 
 
 
@@ -251,13 +324,15 @@ if chs == "4":
         print("\033[1;31;40m \n")
         sys.exit('Run it with root!')
         
-
+if chs == "4":
+    from pystyle import *
+    Write.Print("[+] DHCP listener started. Please wait...", Colors.blue_to_purple, interval=0.1)
         
                    
               
-
 from scapy.all import *
 import time
+
 
 def listen_dhcp():
     # Make sure it is DHCP with the filter options
@@ -294,5 +369,6 @@ def print_packet(packet):
 
 if __name__ == "__main__":
     listen_dhcp()
+
 
 
