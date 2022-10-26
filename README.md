@@ -1,3 +1,5 @@
+Version: v2.1
+
 Funlookup is an information gathering tool.
 
 Please do not insult peoples with this program
