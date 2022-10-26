@@ -14,7 +14,7 @@ import random
 import sys
 import os, sys
 import socket
-
+import pystyle
 from datetime import datetime
 os.system('clear')
 
@@ -23,11 +23,9 @@ os.system('clear')
 
 print('')
 print("\033[1;35;40m \n")
-atexit.register(print,"[*] Thanks for used funlookup")
+atexit.register(print, '[%] Thanks for used funlookup')
    
     
-
-import requests
 url = "http://www.google.com"
 timeout = 5
 try:
@@ -79,7 +77,7 @@ print("\033[1;33;40m \n")
 print('')
 
 print('[1]: Wifi scanner          [5]: My data')
-print('[2]: Telnet checker        \033[1;33;40m[6]: Ip grabber\033[1;33;40m')
+print('[2]: Telnet checker        \033[1;34;40m[6]: Coming soon...\033[1;33;40m')
 print('[3]: Ip data             \033[1;34;40m  [7]: Coming soon...\033[1;33;40m')
 print('[4]: DHCP listener\033[1;31;40m(root)   \033[1;34;40m[8]: Coming soon...')
 print('')
@@ -101,79 +99,11 @@ if(chs <= '0'):
     os.execl(sys.executable, sys.executable, *sys.argv)
     
     
-if(chs >= '7'):
+if(chs >= '6'):
     print("\033[1;31;40m \n")
     print('Wrong choice')
     os.execl(sys.executable, sys.executable, *sys.argv)
 
-####menu of ip grabber
-
-if chs == "6":os.system('clear')
-
-if chs == "6":print("\033[1;33;40m \n")
-if chs == "6":ascii_banner = pyfiglet.figlet_format("funlookup")
-if chs == "6":print(ascii_banner)
-print('')
-if chs == "6":
-    print("\033[1;31;40m \n")
-    print('[!]: Please choose an opinion')
-    print('')
-    if chs == "6":print("\033[1;33;40m \n")
-    print('')
-    print('[1]: Ping a website')
-    print('\033[1;34;40mMore is coming soon...')
-    print('')
-    print('\033[1;30;40m[ press\033[1;31;40m X\033[1;30;40m to exit ]')
-    
-    
-    
-    if chs == "6":print("\033[1;36;40m \n")
-    chp = input('Your choice here: ')
-    
-   
-    if chp == "x":exit()
-    if chp == "X":exit()
-    
-    if(chp <= '0'):
-        print("\033[1;31;40m \n")
-        print('Wrong choice')
-        os.execl(sys.executable, sys.executable, *sys.argv)
-    
-    
-if(chp >= '2'):
-    print("\033[1;31;40m \n")
-    print('Wrong choice')
-    os.execl(sys.executable, sys.executable, *sys.argv)
-    
-    ###ping
-    
-    
-    if chp == "1":
-        tkt = input('Input a website name: ')
-        print('')
-        print('')
-        hostname = tkt
-        response = os.system("ping -c 1 " + hostname)
-        if response == 0:
-            
-            print (hostname, '\033[1;32;40m is up!')
-            print('')
-            op = input('\033[1;36;40mpress \033[1;32;40mENTER\033[1;36;40m to continue or \033[1;31;40mX\033[1;36;40m to exit: ')
-            if op == "":os.execl(sys.executable, sys.executable, *sys.argv)
-            if op == "x":exit()
-        else:
-                print (hostname, '\033[1;31;40m is down!')
-                print('')
-                op = input('\033[1;36;40mpress \033[1;32;40mENTER\033[1;36;40m to continue or \033[1;31;40mX\033[1;36;40m to exit: ')
-                if op == "":os.execl(sys.executable, sys.executable, *sys.argv)
-                if op == "x":exit()
-                
-    if chp == "1":os.system('clear')
-
-    if chp == "1":print("\033[1;33;40m \n")
-    if chp == "1":ascii_banner = pyfiglet.figlet_format("funlookup")
-    if chp == "1":print(ascii_banner)
-print('')
 
 
 ## wifi scanner
@@ -369,6 +299,9 @@ def print_packet(packet):
 
 if __name__ == "__main__":
     listen_dhcp()
+
+
+
 
 
 
