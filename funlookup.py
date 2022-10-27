@@ -19,7 +19,7 @@ from datetime import datetime
 os.system('clear')
 
 
-Write.Print("[+] Welcome to funlookup", Colors.blue_to_red, interval=0.1)
+Write.Print("[+] Welcome to funlookup", Colors.green_to_red, interval=0.1)
 
 print('')
 print("\033[1;35;40m \n")
