@@ -6,7 +6,7 @@ import pyfiglet
 import os
 import atexit
 import urllib.request
-
+from pystyle import *
 
 import requests
 import json
@@ -19,7 +19,7 @@ from datetime import datetime
 os.system('clear')
 
 
-
+Write.Print("[+] Welcome to funlookup", Colors.blue_to_red, interval=0.1)
 
 print('')
 print("\033[1;35;40m \n")
