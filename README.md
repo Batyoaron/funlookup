@@ -33,7 +33,9 @@ Funlookup contain:
     Wifi scanner
     Telnet checker
     Ip scanner
-    DHCP listener 
+    DHCP listener
+
+    My data 
 
 Root needed for DHCP lsitener(not working in ubuntu. Only sudo)
 
