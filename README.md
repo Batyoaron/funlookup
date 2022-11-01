@@ -42,7 +42,8 @@ Funlookup contain:
     Ip scanner
     DHCP listener
 
-    My data 
+    My data
+    Ip tools ---> coming soon
 
 Root needed for DHCP lsitener(not working in ubuntu. Only sudo)
 
