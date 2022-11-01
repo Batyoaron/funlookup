@@ -1,5 +1,9 @@
 Version: v2.1
 
+
+you can give me ideas in email: rkrumpli912@gmail.com
+
+
 Funlookup is an information gathering tool.
 
 Please do not insult peoples with this program
