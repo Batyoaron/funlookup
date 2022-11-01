@@ -16,6 +16,9 @@ If you have issues with downloading pip. Try this:
 
 
 
+
+
+
 things needed:
 
 
